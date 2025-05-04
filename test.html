@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="kk">
+<head>
+  <meta charset="UTF-8">
+  <title>Қазақстан тарихы тесті</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      padding: 20px;
+      background-color: #f0f8ff;
+    }
+    .question {
+      margin-bottom: 20px;
+      padding: 10px;
+      border-radius: 6px;
+    }
+    button {
+      margin-top: 10px;
+      padding: 10px 20px;
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 16px;
+    }
+    #result {
+      margin-top: 20px;
+      font-weight: bold;
+      font-size: 18px;
+    }
+    .correct {
+      background-color: #d4edda;
+    }
+    .wrong {
+      background-color: #f8d7da;
+    }
+    label {
+      display: block;
+      margin-bottom: 5px;
+      padding: 4px;
+      border-radius: 4px;
+    }
+  </style>
+</head>
+<body>
+
+  <h2>Қазақстан тарихы тесті</h2>
+
+  <!-- Сұрақтар -->
+  <div class="question" id="q1">
+    <p>1. Қазақ хандығы қай жылы құрылды?</p>
+    <label><input type="radio" name="answer1" value="1"> 1456</label>
+    <label><input type="radio" name="answer1" value="2"> 1465</label>
+    <label><input type="radio" name="answer1" value="3"> 1502</label>
+    <label><input type="radio" name="answer1" value="4"> 1511</label>
+  </div>
+
+  <div class="question" id="q2">
+    <p>2. Алғашқы қазақ ханы кім болды?</p>
+    <label><input type="radio" name="answer2" value="1"> Тәуке хан</label>
+    <label><input type="radio" name="answer2" value="2"> Абылай хан</label>
+    <label><input type="radio" name="answer2" value="3"> Керей хан</label>
+    <label><input type="radio" name="answer2" value="4"> Қасым хан</label>
+  </div>
+
+  <div class="question" id="q3">
+    <p>3. б.з.б 331-327ж Орта Азияға басып кірген кім?</p>
+    <label><input type="radio" name="answer3" value="1"> Кир</label>
+    <label><input type="radio" name="answer3" value="2"> А.Македонский</label>
+    <label><input type="radio" name="answer3" value="3"> Қытайлар</label>
+    <label><input type="radio" name="answer3" value="4"> Арабтар</label>
+  </div>
+
+  <div class="question" id="q4">
+    <p>4. 1916 жылы 'тағы соғыс' мақаласын кім жазды?</p>
+    <label><input type="radio" name="answer4" value="1"> Ә.Бөкейхан</label>
+    <label><input type="radio" name="answer4" value="2"> Б.Момышұлы</label>
+    <label><input type="radio" name="answer4" value="3"> А.Байтұрсынұлы</label>
+    <label><input type="radio" name="answer4" value="4"> М.Дулатов</label>
+  </div>
+
+  <div class="question" id="q5">
+    <p>5. Түркісіб қай жылы пайдалануға берілді?</p>
+    <label><input type="radio" name="answer5" value="1"> 1927</label>
+    <label><input type="radio" name="answer5" value="2"> 1930</label>
+    <label><input type="radio" name="answer5" value="3"> 1937</label>
+    <label><input type="radio" name="answer5" value="4"> 1931</label>
+  </div>
+
+  <div class="question" id="q6">
+    <p>6. Рейхстагқа ту тіккен кім?</p>
+    <label><input type="radio" name="answer6" value="1"> Р.Қошқарбаев</label>
+    <label><input type="radio" name="answer6" value="2"> Б.Момышұлы</label>
+    <label><input type="radio" name="answer6" value="3"> Қ.Қайсенов</label>
+    <label><input type="radio" name="answer6" value="4"> Т.Бигельдинов</label>
+  </div>
+
+  <div class="question" id="q7">
+    <p>7. Ұлы Шаньюй деп кімдерде айтылған?</p>
+    <label><input type="radio" name="answer7" value="1"> сақтарда</label>
+    <label><input type="radio" name="answer7" value="2"> үйсіндерде</label>
+    <label><input type="radio" name="answer7" value="3"> ғұндарда</label>
+    <label><input type="radio" name="answer7" value="4"> қаңлыларда</label>
+  </div>
+
+  <div class="question" id="q8">
+    <p>8. Алтын Орда ханы Берке кіммен байланыс орнатты?</p>
+    <label><input type="radio" name="answer8" value="1"> Мысыр</label>
+    <label><input type="radio" name="answer8" value="2"> Ақ Орда</label>
+    <label><input type="radio" name="answer8" value="3"> Араб</label>
+    <label><input type="radio" name="answer8" value="4"> Өзбек</label>
+  </div>
+
+  <button onclick="checkAnswer()">✅ Жауаптарды тексеру</button>
+
+  <div id="result"></div>
+
+  <script>
+    const correctAnswers = {
+      answer1: "2",
+      answer2: "3",
+      answer3: "2",
+      answer4: "1",
+      answer5: "4",
+      answer6: "1",
+      answer7: "3",
+      answer8: "1"
+    };
+
+    function checkAnswer() {
+      let correct = 0;
+
+      for (let i = 1; i <= 8; i++) {
+        const name = "answer" + i;
+        const radios = document.getElementsByName(name);
+
+        radios.forEach(r => {
+          r.parentElement.classList.remove("correct", "wrong");
+
+          if (r.checked) {
+            if (r.value === correctAnswers[name]) {
+              correct++;
+              r.parentElement.classList.add("correct");
+            } else {
+              r.parentElement.classList.add("wrong");
+            }
+          } else if (r.value === correctAnswers[name]) {
+            r.parentElement.classList.add("correct");
+          }
+        });
+      }
+
+      const result = document.getElementById("result");
+      result.innerHTML = `🏆 Сіз ${correct} / 8 ұпай жинадыңыз`;
+      result.style.color = "green";
+    }
+  </script>
+
+</body>
+</html>
